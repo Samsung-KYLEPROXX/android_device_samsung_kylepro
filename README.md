@@ -4,6 +4,7 @@
 * Kernel: https://github.com/SandPox/android_kernel_samsung_kyleproxx
 * Vendor: https://github.com/SandPox/android_vendor_samsung_kyleproxx
 
-Thanks to Zim555 for all his helps :)
+### Patch
+* Will release when CM13 arrives.
 
-# [UNDERDEVELOPMENT]
+Thanks to Zim555 for all his helps :)
