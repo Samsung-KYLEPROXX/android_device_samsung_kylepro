@@ -34,10 +34,6 @@ PRODUCT_COPY_FILES += \
 	device/samsung/kylepro/keylayouts/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
 	device/samsung/kylepro/keylayouts/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl
 
-# Copy Apps
-#PRODUCT_COPY_FILES += \
-#	device/samsung/kylepro/apk/Effem.apk:system/app/Effem.apk
-
 # Charger
 PRODUCT_PACKAGES += \
 	charger_res_images
@@ -124,9 +120,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # The extended JNI checks will cause the system to run more slowly, but they can spot a variety of nasty bugs 
 # before they have a chance to cause problems.
 # Default=true for development builds, set by android buildsystem.
-#PRODUCT_PROPERTY_OVERRIDES += \
-#    ro.kernel.android.checkjni=0 \
-#    dalvik.vm.checkjni=false
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.kernel.android.checkjni=0 \
+    dalvik.vm.checkjni=false
 
 # MTP
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \

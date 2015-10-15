@@ -24,7 +24,7 @@ TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 TARGET_OTA_ASSERT_DEVICE := kylepro,S7580,GT-S7580,hawaii,kylexx
 
 # Kernel
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
+BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 BOARD_KERNEL_CMDLINE :=
 BOARD_KERNEL_BASE := 0x82000000
 BOARD_KERNEL_PAGESIZE := 4096
@@ -102,9 +102,7 @@ BOARD_USES_ALSA_AUDIO := true
 # Enable dex-preoptimization to speed up the first boot sequence
 # of an SDK AVD. Note that this operation only works on Linux for now
 ifeq ($(HOST_OS),linux)
-  ifeq ($(WITH_DEXPREOPT),)
     WITH_DEXPREOPT := true
-  endif
 endif
 
 # Bootanimation
