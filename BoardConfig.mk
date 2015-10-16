@@ -54,7 +54,7 @@ BOARD_BLUEDROID_VENDOR_CONF := device/samsung/kylepro/bluetooth/libbt_vndcfg_s75
 
 # Connectivity - Wi-Fi
 BOARD_HAVE_SAMSUNG_WIFI     := true
-WPA_BUILD_SUPPLICANT 		:= true
+WPA_BUILD_SUPPLICANT        := true
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 WPA_SUPPLICANT_VERSION      := VER_0_8_X
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
@@ -175,7 +175,8 @@ TARGET_SPECIFIC_HEADER_PATH := device/samsung/kylepro/include
 TARGET_USES_LOGD := false
 
 # Legends said jemalloc causes a lot of random crash on free()
-# but when running on this device it's terrible slow and causes slow app install; "Optimizing app"; "Android is upgrading"
+# but when dlmalloc running on this device it's terrible slow and causes
+# slow app install; "Optimizing app"; "Android is upgrading"
 # on boot. Feel free to try it
 MALLOC_IMPL := jemalloc
 
