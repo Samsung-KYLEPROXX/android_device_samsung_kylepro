@@ -16,6 +16,8 @@ ARCH_ARM_HAVE_ARMV7A := true
 ARCH_ARM_HAVE_VFP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
 ARCH_ARM_HAVE_NEON := true
+ARCH_ARM_HIGH_OPTIMIZATION := true
+ARCH_ARM_HIGH_OPTIMIZATION_COMPAT := true
 TARGET_BOOTLOADER_BOARD_NAME := hawaii
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
