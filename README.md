@@ -10,7 +10,7 @@
   - Screen Resolution: 480x800
   - RAM: 768M
   - Sensor: Accelerometer, proximity, compass
-  - Misc: WIFI, Bluetooth, HSPA+, GPS
+  - Misc: WIFI, Bluetooth, HSPA+, GPS, FM-Radio
   - Memory: 4GB (Usable 2.2GB)
 
 ### Other resource:
