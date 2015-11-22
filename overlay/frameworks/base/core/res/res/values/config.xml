@@ -27,13 +27,13 @@
     <!-- There is no charging LED. -->
     <bool name="config_unplugTurnsOnScreen">true</bool>
 
-    <!-- Our amoled doesn't animate well. -->
+    <!-- Don't animate. -->
     <bool name="config_animateScreenLights">false</bool>
 
     <!-- disable menu hard key on Crespo in non-pattern lockscreen -->
     <bool name="config_disableMenuKeyInLockScreen">true</bool>
-	
-	<!-- Minimum allowable screen brightness to use in a very dark room.
+    
+    <!-- Minimum allowable screen brightness to use in a very dark room.
          This value sets the floor for the darkest possible auto-brightness
          adjustment.  It is expected to be somewhat less than the first entry in
          config_autoBrightnessLcdBacklightValues so as to allow the user to have
@@ -248,7 +248,7 @@
          config to 7. -->
     <integer name="config_deviceHardwareWakeKeys">65</integer>
 
-    <!-- Disable lockscreen translucent decor by default -->
+    <!-- Enable lockscreen translucent decor by default -->
     <bool name="config_enableLockScreenTranslucentDecor">true</bool>
 
     <!--  Maximum number of supported users -->

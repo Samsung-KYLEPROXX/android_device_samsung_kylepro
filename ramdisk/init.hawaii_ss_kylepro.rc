@@ -5,14 +5,14 @@ on early-init
     mkdir /efs 0771 radio system
 
 on init
-    # See storage config details at http://source.android.com/tech/storage/
+# See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
     export EXTERNAL_STORAGE /storage/emulated/legacy
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
     export EMULATED_STORAGE_TARGET /storage/emulated
 
-    # Support legacy paths
+# Support legacy paths
     symlink /storage/emulated/legacy /sdcard
     symlink /storage/emulated/legacy /mnt/sdcard
     symlink /storage/emulated/legacy /storage/sdcard0
@@ -23,9 +23,9 @@ on init
     mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
     mkdir /storage/sdcard1 0700 root root
 
-    # for backwards compatibility
-    #symlink /storage/sdcard1 /external_sd
-    #symlink /storage/sdcard1 /mnt/external_sd
+# For backwards compatibility
+    symlink /storage/sdcard1 /external_sd
+    symlink /storage/sdcard1 /mnt/external_sd
 
 # To store widevine keybox
     symlink /data/app /factory
@@ -33,7 +33,7 @@ on init
     symlink /dev/block/mmcblk0p11 /dev/block/param
 
 on post-fs-data
-# we will remap this as /storage/sdcard with the sdcard fuse tool
+# We will remap this as /storage/sdcard with the sdcard fuse tool
     mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
 
@@ -45,7 +45,7 @@ on post-fs-data
     chmod 0777 /data/log
     chmod 0777 /data/anr
 
-    #for wifi
+# For WIFI
     mkdir /efs/wifi 0775 radio system
     mkdir /efs/bluetooth 0775 radio system
     mkdir /efs/imei 0775 radio system
@@ -58,7 +58,7 @@ on post-fs-data
     chown system system /efs/imei/.nvmac.info
     chmod 0664 /efs/imei/.nvmac.info
 
- # permissions for bluetooth.
+# Permissions for bluetooth.
     setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
     chown bluetooth net_bt_stack ro.bt.bdaddr_path
     chown bluetooth net_bt_stack /dev/ttyS0
@@ -81,7 +81,7 @@ on post-fs-data
     chown system system /sys/class/backlight/touchkey-led/brightness
     chmod 0660 /sys/class/backlight/touchkey-led/brightness
 
-# permissions for sensors (accelerometer & magnetic & proximity)
+# Permissions for sensors (accelerometer & magnetic & proximity)
     chown system system /sys/class/input/input0/enable
     chown system system /sys/class/input/input0/poll_delay
     chmod 0660 /sys/class/input/input0/enable
@@ -143,7 +143,7 @@ on post-fs-data
     chmod 0660 /sys/class/input/input2/rept_z  
     chmod 0660 /sys/class/input/input2/odr
 
-# for adb
+# For adb
     chmod 0775 /system/etc/usbdev.sh
     chmod 0775 /system/etc/startadb.sh
 
@@ -200,11 +200,7 @@ on boot
     chmod 0660 /sys/class/sensors/magnetic_sensor/selftest
     chmod 0660 /sys/class/sensors/magnetic_sensor/op_mode
 
-## Vibetonz
-#    chmod 0660 /dev/tspdrv
-#    chown root shell /dev/tspdrv
-
-# required so RIL can open kernel RPC drivers
+# Required so RIL can open kernel RPC drivers
     chmod 0660 /dev/bcm_rpc
     chmod 0660 /dev/bcm_irpc
     chown radio radio /dev/bcm_rpc
@@ -234,8 +230,7 @@ on boot
 # Video Telephony
     chmod 0666 /dev/bcm_vsp
 
-
-# allow user space (atx) access to kernel pm debug
+# Allow user space (atx) access to kernel pm debug
     chown system system /sys/module/pm_dbg/parameters/debug
     chmod 0660 /sys/module/pm_dbg/parameters/debug
     chown system system /sys/module/bcmpmu59xxx_ponkey/parameters/simulate_ponkey
@@ -246,8 +241,7 @@ on boot
     chmod 0664 /sys/ponkey/ponkey_mode
 # END BCM QUICK BOOT FEATURE
 
-
-# security driver
+# Security driver
     chmod 0660 /dev/bcm_security
     chown radio root /dev/bcm_security
     mkdir /data/sec 0770
@@ -256,7 +250,7 @@ on boot
 # BCMPMU drivers
     chown -R system system /sys/devices/platform/bcmpmu*/*
 
-# fake some battery state
+# Fake some battery state
     setprop status.battery.state Slow
     setprop status.battery.level 10
     setprop status.battery.level_raw  100
@@ -266,14 +260,14 @@ on boot
     chmod 0777 /dev/s5p-smem
     rm /data/app/tlcd_sock
 
-# phone
+# Phone
     setprop ro.telephony.call_ring.multiple 0
 
 
 # Enable dithering algorithm
     setprop fb.force.dithering 1
 
-# permissions for gps.
+# Permissions for gps.
     mkdir /data/gps 0770 gps system
     chown gps system /data/gps
     chmod 0770 /data/gps
@@ -300,19 +294,19 @@ on boot
 # SEC_PRODUCT_FEATURE_COMMON_USE_MULTISIM
     setprop ro.multisim.simslotcount 1
     
-#    # for multi csc
+# For multi csc
     chown radio radio /proc/LinuStoreIII/efs_info 
     chmod 0664 /proc/LinuStoreIII/efs_info
-#    # for protecting key string
+# For protecting key string
     chown radio radio /proc/LinuStoreIII/keystr 
     chmod 0664 /proc/LinuStoreIII/keystr
-#    # for ril_prop
+# For ril_prop
     chown radio radio /proc/LinuStoreIII/ril_prop 
     chmod 0664 /proc/LinuStoreIII/ril_prop
-#    # for fsbuild_check
+# For fsbuild_check
     chown radio radio /proc/LinuStoreIII/fsbuild_check 
     chmod 0664 /proc/LinuStoreIII/fsbuild_check
-#    # for recovery_opts
+# For recovery_opts
     chown system radio /proc/LinuStoreIII/recovery_opts 
     chmod 0664 /proc/LinuStoreIII/recovery_opts
         
@@ -419,50 +413,43 @@ on boot
     chown system system /sys/class/sec/led/led_lowpower
 
 # Init Compcache taejin5.park
-   chmod 0664 /sys/class/lmk/lowmemorykiller/lmk_state
-   chown system system /sys/class/lmk/lowmemorykiller/lmk_state
-   chmod 0664 /sys/block/zram0/disksize
-   chown system system /sys/block/zram0/disksize
-   write /sys/block/zram0/disksize 104857600
-   chmod 0664 /sys/block/zram0/initstate
-   chown system system /sys/block/zram0/initstate
-   write /sys/block/zram0/initstate 1
+    chmod 0664 /sys/class/lmk/lowmemorykiller/lmk_state
+    chown system system /sys/class/lmk/lowmemorykiller/lmk_state
+    chmod 0664 /sys/block/zram0/disksize
+    chown system system /sys/block/zram0/disksize
+    write /sys/block/zram0/disksize 67108864
+    chmod 0664 /sys/block/zram0/initstate
+    chown system system /sys/block/zram0/initstate
+    write /sys/block/zram0/initstate 1
 
 # serial_no permission change
     chmod 0770 /efs/FactoryApp/serial_no
     chown system system /efs/FactoryApp/serial_no
 
-# disable swap page clustering -- recommended in https://source.android.com/devices/low-ram.html
-    #write /proc/sys/vm/page-cluster 0    
-        
-on charger
-    #mount ext4 /dev/block/mmcblk0p17 /system ro wait noatime
-    #exec sfsck /dev/block/mmcblk0p19 ext4
-    #mount ext4 /dev/block/mmcblk0p19 /data wait nosuid nodev noatime discard,noauto_da_alloc,journal_async_commit
+# Disable swap page clustering -- recommended in https://source.android.com/devices/low-ram.html
+    write /proc/sys/vm/page-cluster 0
 
+on charger
 # Set cpu governor to powersave while in charging mode
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor powersave
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor powersave
- 
-# EHCI runtime enable for LPA
-    write /sys/devices/platform/s5p-ehci/power/control auto
 
 on fs
     mount_all /fstab.hawaii_ss_kylepro
-    #swapon_all fstab.hawaii_ss_kylepro
+    swapon_all fstab.hawaii_ss_kylepro
 
     setprop ro.crypto.fuse_sdcard true
 
-    # don't require sim
+    # Don't require sim
     setprop keyguard.no_require_sim 1
 
-# For NV Read/Write 
-    chown radio system /dev/block/mmcblk0p1    
+# For NV Read/Write
+    chown radio system /dev/block/mmcblk0p1
     chmod 0770 /dev/block/mmcblk0p1
 
     chmod 6755 /system/xbin/su
 
-#for ASE application
+# For ASE application
     mkdir /data/brcm
     mkdir /data/brcm/ase
     mkdir /data/brcm/ase/extras
@@ -483,18 +470,19 @@ on fs
     chmod 0775 /data/brcm/ase/scripts/modem.sh
     chmod 0775 /data/brcm/ase/scripts/atmode.sh
     chmod 0775 /data/brcm/ase/scripts/usbconfig.sh
-#runSysCmd
+
+# runSysCmd
     mkdir /data/brcm/utils
     chmod 0775 /data/brcm/utils
 
-#   Logging required to save file in /data/brcm for configuration
+# Logging required to save file in /data/brcm for configuration
     mkdir /data/brcm
     chmod 0775 /data/brcm
 
 # Permissions for System Server and daemons.
     chown system system /sys/devices/platform/panel/backlight/panel/brightness
 
-    #for touch fw
+    # For touch FW
     chown system system /sys/class/sec/tsp/cmd
     chmod 0660 /sys/class/sec/tsp/cmd
     chown system system /sys/class/sec/tsp/cmd_status
@@ -531,7 +519,7 @@ on post-fs
     chown radio system /efs
     chmod 0771 /efs
 
-# create virtual SD card at /mnt/sdcard, based on the /data/media directory
+# Create virtual SD card at /mnt/sdcard, based on the /data/media directory
 # daemon will drop to user/group system/media_rw after initializing
 # underlying files in /data/media will be created with user and group media_rw (1023)
 service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
@@ -542,7 +530,7 @@ service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emul
         class late_start
         disabled
 
-# create filesystem if necessary
+# Create filesystem if necessary
     service setup_fs /system/bin/setup_fs \
                 /dev/block/mmcblk0p15 \
                 /dev/block/mmcblk0p11
@@ -551,7 +539,7 @@ service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emul
         group root
         oneshot
         
-#bosch sensor deamon
+# bosch sensor deamon
     service sensord /system/bin/sensord
         class main
         user system
@@ -571,10 +559,10 @@ service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emul
         -I/system/etc/wifi/wpa_supplicant_overlay.conf \
         -e/data/misc/wifi/entropy.bin \
         -O/data/misc/wifi/sockets -g@android:wpa_wlan0
-        #   we will start as root and wpa_supplicant will switch to user wifi
-        #   after setting up the capabilities required for WEXT
-        #   user wifi
-        #   group wifi inet keystore
+    #   we will start as root and wpa_supplicant will switch to user wifi
+    #   after setting up the capabilities required for WEXT
+    #   user wifi
+    #   group wifi inet keystore
         class main
         socket wpa_wlan0 dgram 660 wifi wifi
         disabled
@@ -587,7 +575,7 @@ service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emul
         -I/system/etc/wifi/p2p_supplicant_overlay.conf \
         -e/data/misc/wifi/entropy.bin -puse_p2p_group_interface=1 \
         -O/data/misc/wifi/sockets -g@android:wpa_wlan0
-    #   we will start as root and wpa_supplicant will switch to user wifi
+    #   We will start as root and wpa_supplicant will switch to user wifi
     #   after setting up the capabilities required for WEXT
     #   user wifi
     #   group wifi inet keystore
@@ -627,7 +615,7 @@ service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emul
         disabled
         oneshot
 
-#for WiFi MFG(TestMode)
+# For WiFi MFG(TestMode)
     service mfgloader /system/bin/mfgloader
         class main
         disabled
@@ -649,7 +637,7 @@ on property:init.svc.macloader=stopped
         chmod 0664 /data/.cid.info
         chown system root /data/.rev
         chmod 0660 /data/.rev
-# end of wifi
+# End of wifi
 
     service gpsd /system/bin/glgps -c /system/etc/gps/glconfig.xml
         class late_start
@@ -674,7 +662,7 @@ service usb_portd /system/bin/usb_portd
     user system
     group input vpn net_admin net_raw radio system sdcard_rw log mount
 
-#Indicate boot complete to PM to complete PM initialization
+# Indicate boot complete to PM to complete PM initialization
 on property:dev.bootcomplete=1
     write /sys/module/pwr_mgr/parameters/pm_late_init 1
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
@@ -703,19 +691,6 @@ service startadb /system/etc/startadb.sh
     service battery_charger /charger
         class charger
         critical
-        
-#    service playlpm /system/bin/playlpm
-#        user root
-#        critical
-#    service immvibed /system/bin/immvibed 
-#        oneshot
-#    service lpmkey /system/bin/lpmkey
-#        user root
-#        critical
-#on charger
-#    start playlpm
-#    start immvibed
-#    start lpmkey
 
 on property:ro.dumpstate.dmesg=1
     write /proc/sys/kernel/dmesg_restrict 0

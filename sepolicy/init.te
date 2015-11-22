@@ -1,4 +1,4 @@
-# chmod in init.capri_ss_baffin.rc (for bkmgrd)
+# chmod in init.hawaii_ss_kylepro.rc (for bkmgrd)
 allow init block_device:blk_file setattr;
 allow init radio_device:blk_file setattr;
 

@@ -31,7 +31,7 @@ healthd_board_init(struct healthd_config *config)
 }
 
 int
-healthd_board_battery_update(struct android::BatteryProperties *props)
+healthd_board_battery_update(__attribute__((unused)) struct android::BatteryProperties *props)
 {
     // don't log to kernel
     return 1;
