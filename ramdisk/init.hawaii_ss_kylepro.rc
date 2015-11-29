@@ -417,7 +417,7 @@ on boot
     chown system system /sys/class/lmk/lowmemorykiller/lmk_state
     chmod 0664 /sys/block/zram0/disksize
     chown system system /sys/block/zram0/disksize
-    write /sys/block/zram0/disksize 67108864
+    write /sys/block/zram0/disksize 134217728
     chmod 0664 /sys/block/zram0/initstate
     chown system system /sys/block/zram0/initstate
     write /sys/block/zram0/initstate 1
