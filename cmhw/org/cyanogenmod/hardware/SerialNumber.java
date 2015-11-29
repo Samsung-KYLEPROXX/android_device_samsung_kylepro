@@ -36,7 +36,7 @@ public class SerialNumber {
      * Returns the alternative serial number to be displayed.
      */
     public static String getSerialNumber() {
-        return SystemProperties.get("ro.serialno");
+        return SystemProperties.get("ril.serialnumber");
     }
 
 }
