@@ -17,8 +17,7 @@
 
 #include <healthd.h>
 
-void
-healthd_board_init(struct healthd_config *config)
+void healthd_board_init(struct healthd_config *config)
 {
     config->batteryStatusPath      = "/sys/class/power_supply/battery/status";
     config->batteryHealthPath      = "/sys/class/power_supply/battery/health";
@@ -29,8 +28,7 @@ healthd_board_init(struct healthd_config *config)
     config->batteryTechnologyPath  = "/sys/class/power_supply/battery/technology";
 }
 
-int
-healthd_board_battery_update(__attribute__((unused)) struct android::BatteryProperties *props)
+int healthd_board_battery_update(__attribute__((unused)) struct android::BatteryProperties *props)
 {
     // don't log to kernel
     return 1;
