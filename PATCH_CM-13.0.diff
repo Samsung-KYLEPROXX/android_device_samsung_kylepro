@@ -1900,6 +1900,18 @@ diff -ur a/hardware/broadcom/libbt/src/userial_vendor.c b/hardware/broadcom/libb
      userial_ioctl_init_bt_wake(vnd_userial.fd);
  #endif
  
+diff --git a/packages/inputmethods/LatinIME/java-overridable/src/com/android/inputmethod/latin/define/JniLibName.java b/packages/inputmethods/LatinIME/java-overridable/src/com/android/inputmethod/latin/define/JniLibName.java 
+index 83ed5eb..0fcf7ee 100644 
+--- a/packages/inputmethods/LatinIME/java-overridable/src/com/android/inputmethod/latin/define/JniLibName.java 
++++ b/packages/inputmethods/LatinIME/java-overridable/src/com/android/inputmethod/latin/define/JniLibName.java
+@@ -22,5 +22,5 @@ private JniLibName() {
+             }
+
+            public static final String JNI_LIB_NAME = "jni_latinime";
+-           public static final String JNI_LIB_NAME2 = "jni_latinimegoogle";
++          public static final String JNI_LIB_NAME2 = "jni_unbundled_latinimegoogle";
+ }
+
 diff -ur a/packages/services/Telephony/res/values/strings.xml b/packages/services/Telephony/res/values/strings.xml
 --- a/packages/services/Telephony/res/values/strings.xml	2016-02-15 14:14:45.276779000 +0000
 +++ b/packages/services/Telephony/res/values/strings.xml	2016-02-15 14:51:32.868779000 +0000
