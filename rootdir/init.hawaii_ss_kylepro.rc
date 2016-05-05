@@ -17,9 +17,6 @@ on init
     symlink /dev/block/mmcblk0p11 /dev/block/param
 
 on post-fs-data
-# We will remap this as /storage/sdcard with the sdcard fuse tool
-    mkdir /data/media 0770 media_rw media_rw
-    chown media_rw media_rw /data/media
 
 # SA, System SW, SAMSUNG create log directory
     mkdir /data/log 0775 system log
@@ -28,6 +25,8 @@ on post-fs-data
 
     chmod 0777 /data/log
     chmod 0777 /data/anr
+
+    restorecon_recursive /sys/devices/system/cpu/cpufreq/ondemand
 
 # For WIFI
     mkdir /efs/wifi 0775 radio system
@@ -417,8 +416,6 @@ on charger
 on fs
     mount_all /fstab.hawaii_ss_kylepro
     swapon_all fstab.hawaii_ss_kylepro
-
-    setprop ro.crypto.fuse_sdcard true
 
 # Enable PMTUD tcp_mtu_probing
     write /proc/sys/net/ipv4/tcp_mtu_probing 1
