@@ -1203,10 +1203,10 @@ diff -ur a/frameworks/av/media/libstagefright/OMXCodec.cpp b/frameworks/av/media
          }
      }
 
-diff --git a/media/libstagefright/omx/OMXNodeInstance.cpp b/media/libstagefright/omx/OMXNodeInstance.cpp
+diff --git a/frameworks/av/media/libstagefright/omx/OMXNodeInstance.cpp b/frameworks/av/media/libstagefright/omx/OMXNodeInstance.cpp
 index 8c949cb..133a234 100644
---- a/media/libstagefright/omx/OMXNodeInstance.cpp
-+++ b/media/libstagefright/omx/OMXNodeInstance.cpp
+--- a/frameworks/av/media/libstagefright/omx/OMXNodeInstance.cpp
++++ b/frameworks/av/media/libstagefright/omx/OMXNodeInstance.cpp
 @@ -885,10 +885,17 @@ status_t OMXNodeInstance::createGraphicBufferSource(
      }
 
@@ -1219,7 +1219,7 @@ index 8c949cb..133a234 100644
                  "(AndroidOpaque) color format instead of %s(%#x)",
                  asString(def.format.video.eColorFormat), def.format.video.eColorFormat);
          return INVALID_OPERATION;
-+#ifdef CAPRI_HWC
++#ifdef HAWAII_HWC
 + }
 +#endif
 
