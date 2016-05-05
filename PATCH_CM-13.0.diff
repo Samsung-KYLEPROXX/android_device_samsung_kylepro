@@ -1909,7 +1909,7 @@ index 83ed5eb..0fcf7ee 100644
 
             public static final String JNI_LIB_NAME = "jni_latinime";
 -           public static final String JNI_LIB_NAME2 = "jni_latinimegoogle";
-+          public static final String JNI_LIB_NAME2 = "jni_unbundled_latinimegoogle";
++           public static final String JNI_LIB_NAME2 = "jni_unbundled_latinimegoogle";
  }
 
 diff -ur a/packages/services/Telephony/res/values/strings.xml b/packages/services/Telephony/res/values/strings.xml
