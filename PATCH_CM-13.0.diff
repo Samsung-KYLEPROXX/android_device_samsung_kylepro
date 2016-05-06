@@ -1202,7 +1202,30 @@ diff -ur a/frameworks/av/media/libstagefright/OMXCodec.cpp b/frameworks/av/media
 +            }
          }
      }
- 
+
+diff --git a/frameworks/av/media/libstagefright/omx/OMXNodeInstance.cpp b/frameworks/av/media/libstagefright/omx/OMXNodeInstance.cpp
+index 8c949cb..133a234 100644
+--- a/frameworks/av/media/libstagefright/omx/OMXNodeInstance.cpp
++++ b/frameworks/av/media/libstagefright/omx/OMXNodeInstance.cpp
+@@ -885,10 +885,17 @@ status_t OMXNodeInstance::createGraphicBufferSource(
+     }
+
+     if (def.format.video.eColorFormat != OMX_COLOR_FormatAndroidOpaque) {
++#ifdef HAWAII_HWC
++ // VC Encoder change OMX_COLOR_FormatAndroidOpaque to 0x7F000005
++ if (def.format.video.eColorFormat != 0x7F000005) {
++#endif
+         CLOGW("createInputSurface requires COLOR_FormatSurface "
+                 "(AndroidOpaque) color format instead of %s(%#x)",
+                 asString(def.format.video.eColorFormat), def.format.video.eColorFormat);
+         return INVALID_OPERATION;
++#ifdef HAWAII_HWC
++ }
++#endif
+
+     }
+
+     uint32_t usageBits;
 diff -ur a/frameworks/base/telephony/java/android/telephony/TelephonyManager.java b/frameworks/base/telephony/java/android/telephony/TelephonyManager.java
 --- a/frameworks/base/telephony/java/android/telephony/TelephonyManager.java	2016-02-15 14:14:41.484779000 +0000
 +++ b/frameworks/base/telephony/java/android/telephony/TelephonyManager.java	2016-02-15 14:44:40.636779000 +0000
@@ -1900,36 +1923,18 @@ diff -ur a/hardware/broadcom/libbt/src/userial_vendor.c b/hardware/broadcom/libb
      userial_ioctl_init_bt_wake(vnd_userial.fd);
  #endif
  
-diff -ur a/packages/inputmethods/LatinIME/java/src/com/android/inputmethod/latin/utils/JniUtils.java b/packages/inputmethods/LatinIME/java/src/com/android/inputmethod/latin/utils/JniUtils.java
---- a/packages/inputmethods/LatinIME/java/src/com/android/inputmethod/latin/utils/JniUtils.java	2016-02-15 14:14:50.920779000 +0000
-+++ b/packages/inputmethods/LatinIME/java/src/com/android/inputmethod/latin/utils/JniUtils.java	2016-02-15 14:50:32.300779000 +0000
-@@ -26,14 +26,10 @@
-     public static boolean mHaveGestureLib = false;
-     static {
-         try {
--            System.loadLibrary(JniLibName.JNI_LIB_NAME2);
-+            System.loadLibrary(JniLibName.JNI_LIB_NAME);
-             mHaveGestureLib = true;
--        } catch (UnsatisfiedLinkError ue) {
--            try {
--                System.loadLibrary(JniLibName.JNI_LIB_NAME);
--            } catch (UnsatisfiedLinkError ule) {
--                Log.e(TAG, "Could not load native library " + JniLibName.JNI_LIB_NAME, ule);
--            }
-+        } catch (UnsatisfiedLinkError ule) {
-+            Log.e(TAG, "Could not load native library " + JniLibName.JNI_LIB_NAME, ule);
-         }
-     }
- 
-diff -ur a/packages/inputmethods/LatinIME/java-overridable/src/com/android/inputmethod/latin/define/JniLibName.java b/packages/inputmethods/LatinIME/java-overridable/src/com/android/inputmethod/latin/define/JniLibName.java
---- a/packages/inputmethods/LatinIME/java-overridable/src/com/android/inputmethod/latin/define/JniLibName.java	2016-02-15 14:14:51.000779000 +0000
-+++ b/packages/inputmethods/LatinIME/java-overridable/src/com/android/inputmethod/latin/define/JniLibName.java	2016-02-15 14:50:32.300779000 +0000
-@@ -22,5 +22,4 @@
-     }
- 
-     public static final String JNI_LIB_NAME = "jni_latinime";
--    public static final String JNI_LIB_NAME2 = "jni_latinimegoogle";
+diff --git a/packages/inputmethods/LatinIME/java-overridable/src/com/android/inputmethod/latin/define/JniLibName.java b/packages/inputmethods/LatinIME/java-overridable/src/com/android/inputmethod/latin/define/JniLibName.java 
+index 83ed5eb..0fcf7ee 100644 
+--- a/packages/inputmethods/LatinIME/java-overridable/src/com/android/inputmethod/latin/define/JniLibName.java 
++++ b/packages/inputmethods/LatinIME/java-overridable/src/com/android/inputmethod/latin/define/JniLibName.java
+@@ -22,5 +22,5 @@ private JniLibName() {
+             }
+
+            public static final String JNI_LIB_NAME = "jni_latinime";
+-           public static final String JNI_LIB_NAME2 = "jni_latinimegoogle";
++          public static final String JNI_LIB_NAME2 = "jni_unbundled_latinimegoogle";
  }
+
 diff -ur a/packages/services/Telephony/res/values/strings.xml b/packages/services/Telephony/res/values/strings.xml
 --- a/packages/services/Telephony/res/values/strings.xml	2016-02-15 14:14:45.276779000 +0000
 +++ b/packages/services/Telephony/res/values/strings.xml	2016-02-15 14:51:32.868779000 +0000
